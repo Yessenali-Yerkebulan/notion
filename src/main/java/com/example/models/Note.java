@@ -20,5 +20,5 @@ public class Note {
     private String content;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date createAt;
+    private Date createdAt;
 }
