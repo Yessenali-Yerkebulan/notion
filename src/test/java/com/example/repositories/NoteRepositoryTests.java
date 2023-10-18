@@ -2,6 +2,8 @@ package com.example.repositories;
 
 import com.example.models.Note;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.checkerframework.checker.units.qual.N;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 public class NoteRepositoryTests {
@@ -70,5 +73,14 @@ public class NoteRepositoryTests {
         Note updatedNote = noteRepository.save(savedNote);
         assertThat(updatedNote.getTitle()).isEqualTo("Updated Note");
         assertThat(updatedNote.getContent()).isEqualTo("Updated Content");
+    }
+
+    @Test
+    @DisplayName("JUnit test for delete note operation")
+    public void givenNoteObject_whenDelete_thenRemoveNote(){
+        noteRepository.save(note);
+        noteRepository.delete(note);
+        Optional<Note> noteOptional = noteRepository.findById(note.getId());
+        assertThat(noteOptional).isEmpty();
     }
 }
