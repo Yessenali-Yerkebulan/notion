@@ -83,4 +83,13 @@ public class NoteRepositoryTests {
         Optional<Note> noteOptional = noteRepository.findById(note.getId());
         assertThat(noteOptional).isEmpty();
     }
+
+    @Test
+    @DisplayName("JUnit test for delete note by id operation")
+    public void givenNoteObject_whenDeleteById_thenRemoveNote(){
+        noteRepository.save(note);
+        noteRepository.deleteById(note.getId());
+        Optional<Note> noteOptional = noteRepository.findById(note.getId());
+        assertThat(noteOptional).isEmpty();
+    }
 }
