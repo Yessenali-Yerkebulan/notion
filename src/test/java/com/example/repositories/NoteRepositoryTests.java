@@ -59,4 +59,16 @@ public class NoteRepositoryTests {
         Note noteDB = noteRepository.findById(note.getId()).get();
         assertThat(noteDB).isNotNull();
     }
+
+    @Test
+    @DisplayName("JUnit test for update note operation")
+    public void givenNoteObject_whenUpdateNote_thenReturnUpdatedNote(){
+        noteRepository.save(note);
+        Note savedNote = noteRepository.findById(note.getId()).get();
+        savedNote.setTitle("Updated Note");
+        savedNote.setContent("Updated Content");
+        Note updatedNote = noteRepository.save(savedNote);
+        assertThat(updatedNote.getTitle()).isEqualTo("Updated Note");
+        assertThat(updatedNote.getContent()).isEqualTo("Updated Content");
+    }
 }
